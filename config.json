@@ -1,0 +1,47 @@
+{
+	"name": "REDCapCon2024 Demo Module",
+	"namespace": "Vanderbilt\\RCC2024Demo",
+	"framework-version": 16,
+	"description": "Live coded module used for the Intro to EM Development session at 2024",
+	"authors": [
+		{
+			"name": "Ryan Moore",
+			"email": "datacore@vumc.org",
+			"institution": "Vanderbilt University Medical Center"
+		},
+		{
+			"name": "Kyle McGuffin",
+			"email": "datacore@vumc.org",
+			"institution": "Vanderbilt University Medical Center"
+		},
+		{
+			"name": "Kyle Chesney",
+			"email": "datacore@vumc.org",
+			"institution": "Vanderbilt University Medical Center"
+		}
+	],
+	"compatibility": {
+		"redcap-version-min": "14.6.4"
+	},
+	"project-settings": [
+	],
+	"links": {
+		"project": [
+			{
+				"name": "Project Dashboard Page",
+				"icon": "fas fa-databases-arrow",
+				"url": "pages/project_dashboard_page.php",
+				"show-header-and-footer": true
+			},
+		]
+	},
+	"crons": [
+		{
+			"cron_name": "exports",
+			"cron_description": "Good cron description",
+			"method": "cron1",
+			"cron_frequency": "60",
+			"cron_max_run_time": "86400"
+		}
+	]
+}
