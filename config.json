@@ -1,8 +1,9 @@
 {
 	"name": "REDCapCon2024 Demo Module",
 	"namespace": "Vanderbilt\\RCC2024Demo",
-	"framework-version": 16,
+	"framework-version": 15,
 	"description": "Live coded module used for the Intro to EM Development session at 2024",
+	"documentation": "README.md",
 	"authors": [
 		{
 			"name": "Ryan Moore",
@@ -21,13 +22,14 @@
 		}
 	],
 	"compatibility": {
-		"redcap-version-min": "14.6.2"
+		"redcap-version-min": "14.0.2"
 	},
 	"project-settings": [
 		{
 			"key": "src-project",
 			"name": "Source Project to Pull Data From",
-			"type": "project-id"
+			"type": "project-id",
+			"autocomplete": true
 		}
 	],
 	"links": {

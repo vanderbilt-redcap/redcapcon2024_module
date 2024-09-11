@@ -7,11 +7,17 @@ use REDCap;
 
 class RCC2024Demo extends AbstractExternalModule {
 
-    function redcap_data_entry_page_top($project_id) {
-        $project = new \Project();
-		echo "<pre>";
-		print_r($this->retrieveProjectData($project));
-		echo "</pre>";
+    function redcap_data_entry_form_top($project_id, $record, $instrument, $event_id, $group_id, $repeat_instance) {
+        $this_project = new \Project();
+        $cur_project_data = $this->retrieveProjectData($this_project);
+
+        $target_project = new \Project($target_pid);
+        $result = $this->compareProjectRecord($this_project, $target_project, $record);
+
+
+        var_dump($result);
+
+        echo file_get_contents("record_div.html");
     }
 
 	public function printOutSomething($project_id) {
@@ -66,6 +72,8 @@ class RCC2024Demo extends AbstractExternalModule {
     }
 
 	function compareProjectRecord(\Project $srcProject, \Project $dstProject, $record) : string {
+        if ($srcProject->metadata !== $dstProject->metadata) { return "project mismatch"; }
+
 		$recordStatus = "error";
         $srcData = $this->retrieveProjectData($srcProject,[$record]);
         $dstData = $this->retrieveProjectData($dstProject,[$record]);
