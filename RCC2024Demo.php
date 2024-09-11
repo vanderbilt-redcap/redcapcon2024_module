@@ -5,7 +5,7 @@ namespace Vanderbilt\RCC2024Demo;
 use ExternalModules\AbstractExternalModule;
 use REDCap;
 
-class ExternalModule extends AbstractExternalModule {
+class RCC2024Demo extends AbstractExternalModule {
 
     function redcap_every_page_top($project_id) {
         $url = $_SERVER['REQUEST_URI'];
