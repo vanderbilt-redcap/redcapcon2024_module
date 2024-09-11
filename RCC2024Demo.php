@@ -8,12 +8,11 @@ use REDCap;
 class RCC2024Demo extends AbstractExternalModule {
 
     function redcap_data_entry_form_top($project_id, $record, $instrument, $event_id, $group_id, $repeat_instance) {
-        $this_project = new \Project();
-        $cur_project_data = $this->retrieveProjectData($this_project);
+        $this_project = new \Project($project_id);
 
-        $target_project = new \Project($target_pid);
-        $result = $this->compareProjectRecord($this_project, $target_project, $record);
-
+        $source_pid = $this->framework->getProjectSetting("src-project");
+        $source_project = new \Project($source_pid);
+        $result = $this->compareProjectRecord($this_project, $source_project, $record);
 
         var_dump($result);
 
@@ -79,7 +78,7 @@ class RCC2024Demo extends AbstractExternalModule {
         $dstData = $this->retrieveProjectData($dstProject,[$record]);
 
 		if (!empty($dstData)) {
-			if ($dstData == $srcData) {
+			if ($dstData === $srcData) {
 				$recordStatus = "matched";
 			} else {
 				$recordStatus = "not-matched";

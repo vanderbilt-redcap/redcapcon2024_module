@@ -29,7 +29,8 @@
 			"key": "src-project",
 			"name": "Source Project to Pull Data From",
 			"type": "project-id",
-			"autocomplete": true
+			"autocomplete": true,
+			"required": true
 		}
 	],
 	"links": {
