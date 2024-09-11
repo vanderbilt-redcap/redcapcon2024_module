@@ -71,7 +71,7 @@ class RCC2024Demo extends AbstractExternalModule {
     }
 
 	function compareProjectRecord(\Project $srcProject, \Project $dstProject, $record) : string {
-        if ($srcProject->metadata !== $dstProject->metadata) { return "project mismatch"; }
+        if ($srcProject->forms !== $dstProject->forms) { return "project mismatch"; }
 
 		$recordStatus = "error";
         $srcData = $this->retrieveProjectData($srcProject,[$record]);
