@@ -3,6 +3,7 @@
 	"namespace": "Vanderbilt\\RCC2024Demo",
 	"framework-version": 14,
 	"description": "Live coded module used for the Intro to EM Development session at 2024",
+	"documentation": "README.md",
 	"authors": [
 		{
 			"name": "Ryan Moore",
@@ -27,7 +28,9 @@
 		{
 			"key": "src-project",
 			"name": "Source Project to Pull Data From",
-			"type": "project-id"
+			"type": "project-id",
+			"autocomplete": true,
+			"required": true
 		}
 	],
 	"links": {
