@@ -2,4 +2,5 @@
 
 namespace Vanderbilt\RCC2024Demo;
 
-echo "Hello world";
+$module = new RCC2024Demo();
+$module->printOutSomething($project_id);

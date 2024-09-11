@@ -5,7 +5,7 @@ namespace Vanderbilt\RCC2024Demo;
 use ExternalModules\AbstractExternalModule;
 use REDCap;
 
-class ExternalModule extends AbstractExternalModule {
+class RCC2024Demo extends AbstractExternalModule {
 
     function redcap_data_entry_page_top($project_id) {
         $project = new \Project();
@@ -14,6 +14,9 @@ class ExternalModule extends AbstractExternalModule {
 		echo "</pre>";
     }
 
+	public function printOutSomething($project_id) {
+		echo "You passed me the project ID $project_id";
+	}
 
     protected function includeCss(string $path) {
         echo '<link rel="stylesheet" href="' . $this->getUrl($path) . '">';

@@ -21,9 +21,14 @@
 		}
 	],
 	"compatibility": {
-		"redcap-version-min": "14.6.4"
+		"redcap-version-min": "14.6.2"
 	},
 	"project-settings": [
+		{
+			"key": "src-project",
+			"name": "Source Project to Pull Data From",
+			"type": "project-id"
+		}
 	],
 	"links": {
 		"project": [
