@@ -35,6 +35,31 @@ class RCC2024Demo extends AbstractExternalModule {
     }
 
     function cron1($cron_info) {
+		foreach($this->framework->getProjectsWithModuleEnabled() as $projectId) {
+			$project = new \Project($projectId);
+			$srcProjectId = $this->framework->getProjectSetting("src-project", $projectId);
+			if(!is_numeric($srcProjectId)) {
+				error_log("Project Not Configured: ".$this->escape($projectId));
+			}
+			
+			$srcProject = new \Project($srcProjectId);
+			$recordData = $this->retrieveProjectData($project);
+			foreach($recordData as $thisRecord) {
+				$matchStatus = $this->compareProjectRecord($srcProject,$project,$thisRecord);
+				if($matchStatus == "not-matched" || $matchStatus == "missing") {
+					$saveStatus = \REDCap::saveData([
+						"project_id" => $projectId,
+						"data" => [$thisRecord],
+						"dataFormat" => "json-array",
+						"overwriteBehavior" => "overwrite"
+					]);
+					
+					if(isset($saveStatus["errors"])) {
+						error_log($saveStatus);
+					}
+				}
+			}
+		}
         echo "I am a cron!";
         sleep(60*5 + 30);
         return true;
