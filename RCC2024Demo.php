@@ -43,9 +43,9 @@ class RCC2024Demo extends AbstractExternalModule {
 			}
 			
 			$srcProject = new \Project($srcProjectId);
-			$recordData = $this->retrieveProjectData($project);
+			$recordData = $this->retrieveProjectData($srcProject);
 			foreach($recordData as $thisRecord) {
-				$matchStatus = $this->compareProjectRecord($srcProject,$project,$thisRecord);
+				$matchStatus = $this->compareProjectRecord($srcProject,$project,$thisRecord[$srcProject->table_pk]);
 				if($matchStatus == "not-matched" || $matchStatus == "missing") {
 					$saveStatus = \REDCap::saveData([
 						"project_id" => $projectId,
@@ -55,13 +55,18 @@ class RCC2024Demo extends AbstractExternalModule {
 					]);
 					
 					if(isset($saveStatus["errors"])) {
-						error_log($saveStatus);
+						error_log(var_export($saveStatus,true));
 					}
+					else {
+						error_log("Successfully updated record ".$this->escape($thisRecord[$project->table_pk])."!");
+					}
+				}
+				else {
+					error_log("Already matched ".$this->escape($thisRecord[$project->table_pk]));
 				}
 			}
 		}
         echo "I am a cron!";
-        sleep(60*5 + 30);
         return true;
     }
 
@@ -93,7 +98,6 @@ class RCC2024Demo extends AbstractExternalModule {
 		if (empty($projectData['errors'])) {
 			return $projectData;
 		}
-
 		return [];
 	}
 }
