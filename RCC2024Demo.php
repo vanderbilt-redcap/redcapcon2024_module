@@ -8,22 +8,21 @@ use REDCap;
 class RCC2024Demo extends AbstractExternalModule {
 
     function redcap_data_entry_form_top($project_id, $record, $instrument, $event_id, $group_id, $repeat_instance) {
+		$this->includeCss('css/module_style.css');
         $this_project = new \Project($project_id);
 
         $source_pid = $this->framework->getProjectSetting("src-project");
         $source_project = new \Project($source_pid);
         $result = $this->compareProjectRecord($this_project, $source_project, $record);
 
-        var_dump($result);
-
-        echo file_get_contents("record_div.html");
+        echo "<table><tr><th>Record</th><th>Status</th></tr>".$this->printRecordStatusRow($record,$result)."</table><br/><br/><br/>";
     }
 
-	public function printOutSomething($project_id) {
-		echo "You passed me the project ID $project_id";
+	public function retrieveRecordList($project_id) {
+		return is_numeric($project_id) ? \Records::getRecordList($project_id) : [];
 	}
 
-    protected function includeCss(string $path) {
+    function includeCss(string $path) {
         echo '<link rel="stylesheet" href="' . $this->getUrl($path) . '">';
     }
 
@@ -32,6 +31,9 @@ class RCC2024Demo extends AbstractExternalModule {
         echo '<script src="' . $this->getUrl($path) . '"></script>';
     }
 
+	function printRecordStatusRow($record,$status) {
+		return "<tr><td>$record</td><td>$status</td></tr>";
+	}
 
     protected function setJsSettings(array $settings) {
         foreach ($settings as $k => $v) {
