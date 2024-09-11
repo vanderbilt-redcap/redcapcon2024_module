@@ -32,7 +32,7 @@
 				"icon": "fas fa-databases-arrow",
 				"url": "pages/project_dashboard_page.php",
 				"show-header-and-footer": true
-			},
+			}
 		]
 	},
 	"crons": [
